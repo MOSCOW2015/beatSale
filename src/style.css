@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* У DaisyUI темы по умолчанию `bg-base-200`, но зададим небольшую базовую
+   стилизацию для белого текста на светлых темах. */
+html,
+body {
+  height: 100%;
+}
+
