@@ -16,7 +16,17 @@ import AdminGoodsListView from '../views/admin/AdminGoodsListView.vue'
 import AdminGoodsAddView from '../views/admin/AdminGoodsAddView.vue'
 import AdminGoodsEditView from '../views/admin/AdminGoodsEditView.vue'
 
-import { useAuthStore } from '../stores/auth.js'
+const ADMIN_EMAIL = 'admin@beatstars.com'
+const AUTH_KEY = 'beatstars_auth'
+
+function isAdminFromStorage() {
+  try {
+    const data = JSON.parse(localStorage.getItem(AUTH_KEY))
+    return data?.email === ADMIN_EMAIL
+  } catch {
+    return false
+  }
+}
 
 const router = createRouter({
   history: createWebHistory(),
@@ -45,7 +55,7 @@ const router = createRouter({
       path: '/goods/:id',
       component: ProductView,
       children: [
-        { path: '', redirect: 'overview' },
+        { path: '', redirect: { name: 'goods.overview' } },
         { path: 'overview', name: 'goods.overview', component: ProductTabOverviewView },
         { path: 'details', name: 'goods.details', component: ProductTabDetailsView },
         { path: 'seller', name: 'goods.seller', component: ProductTabSellerView }
@@ -56,7 +66,7 @@ const router = createRouter({
       component: AdminDashboardView,
       meta: { requiresAdmin: true },
       children: [
-        { path: '', redirect: 'goods' },
+        { path: '', redirect: { name: 'admin.goods' } },
         {
           path: 'goods',
           name: 'admin.goods',
@@ -87,15 +97,14 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const requiresAdmin = to.matched.some((record) => record.meta?.requiresAdmin)
-  const auth = useAuthStore()
+  const adminLoggedIn = isAdminFromStorage()
 
-  if (requiresAdmin && !auth.isAdmin) {
+  if (requiresAdmin && !adminLoggedIn) {
     return next({ name: 'login', query: { next: to.fullPath } })
   }
 
-  // Если админ уже залогинен — лишний раз не показываем login/register.
   const authPage = to.name === 'login' || to.name === 'register'
-  if (authPage && auth.isAdmin) {
+  if (authPage && adminLoggedIn) {
     return next({ name: 'home' })
   }
 

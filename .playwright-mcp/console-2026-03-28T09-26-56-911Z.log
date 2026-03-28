@@ -1,0 +1,7 @@
+[   30081ms] [ERROR] Failed to load resource: net::ERR_TIMED_OUT @ https://placehold.co/600x600/png?text=Neon+Groove:0
+[   30081ms] [ERROR] Failed to load resource: net::ERR_TIMED_OUT @ https://placehold.co/600x600/png?text=Street+Drums:0
+[   30081ms] [ERROR] Failed to load resource: net::ERR_TIMED_OUT @ https://placehold.co/600x600/png?text=Summer+Loops:0
+[   30081ms] [ERROR] Failed to load resource: net::ERR_TIMED_OUT @ https://placehold.co/600x600/png?text=Analog+Samples:0
+[   30081ms] [ERROR] Failed to load resource: net::ERR_TIMED_OUT @ https://placehold.co/600x600/png?text=Dark+Melodies:0
+[   30081ms] [ERROR] Failed to load resource: net::ERR_TIMED_OUT @ https://placehold.co/600x600/png?text=Velvet+Night:0
+[   30089ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:4173/favicon.ico:0
