@@ -90,7 +90,7 @@ async function onSubmit() {
       return
     }
 
-    const next = route.query.next ? String(route.query.next) : '/'
+    const next = route.query.next ? String(route.query.next) : auth.isAdmin ? '/admin' : '/'
     router.push(next)
   } finally {
     loading.value = false

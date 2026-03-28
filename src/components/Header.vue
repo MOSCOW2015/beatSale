@@ -14,33 +14,17 @@
         </router-link>
 
         <template v-if="auth.isAdmin">
-          <span class="hidden text-sm opacity-80 sm:inline">
-            {{ auth.username }}
-          </span>
-          <button class="btn btn-sm btn-secondary" @click="toggleGuestAdmin">
-            Guest mode
-          </button>
-          <button class="btn btn-sm btn-ghost" @click="logout">
-            Logout
-          </button>
+          <router-link to="/admin" class="btn btn-sm btn-secondary">Admin Panel</router-link>
+          <span class="hidden text-sm opacity-80 sm:inline">{{ auth.username }}</span>
+          <button class="btn btn-sm btn-ghost" @click="logout">Logout</button>
         </template>
 
         <template v-else-if="auth.isLoggedIn">
-          <span class="hidden text-sm opacity-80 sm:inline">
-            {{ auth.username }}
-          </span>
-          <button class="btn btn-sm btn-secondary" @click="toggleGuestAdmin">
-            Admin mode
-          </button>
-          <button class="btn btn-sm btn-ghost" @click="logout">
-            Logout
-          </button>
+          <span class="hidden text-sm opacity-80 sm:inline">{{ auth.username }}</span>
+          <button class="btn btn-sm btn-ghost" @click="logout">Logout</button>
         </template>
 
         <template v-else>
-          <button class="btn btn-sm btn-secondary" @click="toggleGuestAdmin">
-            Admin mode
-          </button>
           <router-link to="/login" class="btn btn-sm btn-primary">Login</router-link>
         </template>
       </div>
@@ -63,18 +47,6 @@ const cartCount = computed(() => cart.cartCount)
 
 function logout() {
   auth.logout()
-  router.push('/')
-}
-
-function toggleGuestAdmin() {
-  if (auth.isAdmin) {
-    auth.setAdminMode(false)
-  } else {
-    auth.setAdminMode(true)
-    // После переключения в админ-режим ведём на админ-панель.
-    router.push('/admin')
-    return
-  }
   router.push('/')
 }
 </script>
